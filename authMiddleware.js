@@ -6,12 +6,17 @@ const PASSWORD = "secret";
 
 module.exports = function(req, res, next) {
 
+    // console.log(req.url);
+    // console.log(req.method);
+    // console.log(req.body);
+    // console.log(req.body.name);
+
     if ((req.url == "/api/login" || req.url == "/login") && req.method == "POST") {
-        if (req.body != null && req.body.name == USERNAME && req.body.PASSWORD == PASSWORD) {
+        if (req.body != null && req.body.name == USERNAME && req.body.password == PASSWORD) {
             let token = jwt.sign({ data: USERNAME, expiresIn: "1h"}, APP_SECRET);
             res.json({ success: true, token: token });
         } else {
-            res.json({ sucess: false });
+            res.json({ success: false });
         }
         res.end();
         return;

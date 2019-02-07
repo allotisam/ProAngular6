@@ -1,4 +1,5 @@
 import { ApplicationRef, Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Model } from './repository.model';
 import { Product } from './product.model';
 
@@ -11,6 +12,7 @@ export class ProductComponent {
 
     selectedProduct: string;
     newProduct: Product = new Product();
+    formSubmitted = false;
 
     constructor(ref: ApplicationRef) {
         (<any>window).appRef = ref;
@@ -59,5 +61,25 @@ export class ProductComponent {
         }
 
         return messages;
+    }
+
+    getFormValidationMessages(form: NgForm): string[] {
+        const messages: string[] = [];
+
+        Object.keys(form.controls).forEach(k => {
+            this.getValidationMessages(form.controls[k], k).forEach(m => messages.push(m));
+        });
+
+        return messages;
+    }
+
+    submitForm(form: NgForm) {
+        this.formSubmitted = true;
+        if (form.valid) {
+            this.addProduct(this.newProduct);
+            this.newProduct = new Product();
+            form.reset();
+            this.formSubmitted = false;
+        }
     }
 }

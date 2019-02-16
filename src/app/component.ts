@@ -10,11 +10,9 @@ import { ProductFormGroup } from './form.model';
 })
 export class ProductComponent {
     model: Model = new Model();
-    form: ProductFormGroup = new ProductFormGroup();
-
-    selectedProduct: string;
     newProduct: Product = new Product();
-    formSubmitted = false;
+    form: ProductFormGroup = new ProductFormGroup();
+    formSubmitted: boolean = false;
 
     constructor(ref: ApplicationRef) {
         (<any>window).appRef = ref;
@@ -29,50 +27,8 @@ export class ProductComponent {
         return this.model.getProducts();
     }
 
-    getSelected(product: Product): boolean {
-        return product.name === this.selectedProduct;
-    }
-
-    get jsonProduct() {
-        return JSON.stringify(this.newProduct);
-    }
-
     addProduct(p: Product) {
-        console.log('New Product: ' + this.jsonProduct);
-    }
-
-    getValidationMessages(state: any, thingName?: string) {
-        const thing: string = state.path || thingName;
-        const messages: string[] = [];
-
-        if (state.errors) {
-            // tslint:disable-next-line:forin
-            for (const errorName in state.errors) {
-                switch (errorName) {
-                    case 'required':
-                        messages.push(`You must enter a ${thing}`);
-                        break;
-                    case 'minlength':
-                        messages.push(`A ${thing} must be at least ${state.errors['minlength'].requiredLength} characters.`);
-                        break;
-                    case 'pattern':
-                        messages.push(`The ${thing} contains illegal characters.`);
-                        break;
-                }
-            }
-        }
-
-        return messages;
-    }
-
-    getFormValidationMessages(form: NgForm): string[] {
-        const messages: string[] = [];
-
-        Object.keys(form.controls).forEach(k => {
-            this.getValidationMessages(form.controls[k], k).forEach(m => messages.push(m));
-        });
-
-        return messages;
+        this.model.saveProduct(p);
     }
 
     submitForm(form: NgForm) {

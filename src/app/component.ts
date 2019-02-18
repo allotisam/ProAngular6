@@ -24,7 +24,9 @@ export class ProductComponent {
     }
 
     getProducts(): Product[] {
-        return this.model.getProducts();
+        const numOfProducts = this.model.getProducts();
+        console.log(numOfProducts);
+        return numOfProducts;
     }
 
     addProduct(p: Product) {

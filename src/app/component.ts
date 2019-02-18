@@ -13,6 +13,7 @@ export class ProductComponent {
     newProduct: Product = new Product();
     form: ProductFormGroup = new ProductFormGroup();
     formSubmitted: boolean = false;
+    showTable = true;
 
     constructor(ref: ApplicationRef) {
         (<any>window).appRef = ref;

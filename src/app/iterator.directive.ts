@@ -2,7 +2,6 @@ import { Directive, ViewContainerRef, TemplateRef,
     Input, SimpleChange, IterableDiffer, IterableDiffers,
     ChangeDetectorRef, CollectionChangeRecord, DefaultIterableDiffer, ViewRef
 } from '@angular/core';
-import { removeAllListeners } from 'cluster';
 
 @Directive({
     selector: '[paForOf]'

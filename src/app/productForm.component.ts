@@ -5,8 +5,8 @@ import { ProductFormGroup } from './form.model';
 @Component({
     selector: 'paProductForm',
     templateUrl: 'productForm.component.html',
-    styleUrls: ['productForm.component.css'],
-    encapsulation: ViewEncapsulation.Emulated
+    // styleUrls: ['productForm.component.css'],
+    // encapsulation: ViewEncapsulation.Emulated
 })
 export class ProductFormComponent { 
     form: ProductFormGroup = new ProductFormGroup();

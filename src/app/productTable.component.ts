@@ -8,7 +8,7 @@ import { PaCellColor } from './cellColor.directive';
     templateUrl: 'productTable.component.html'
 })
 export class ProductTableComponent {
-
+    
     @Input('model')
     dataModel: Model;
 

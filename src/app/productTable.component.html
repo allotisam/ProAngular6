@@ -4,6 +4,7 @@
         <th>Name</th>
         <th>Category</th>
         <th>Price</th>
+        <th>Discount</th>
         <th></th>
     </tr>
     <tbody>
@@ -11,7 +12,10 @@
             <td style="vertical-align: middle">{{ i+1 }}</td>
             <td style="vertical-align: middle">{{ item.name | uppercase }}</td>
             <td style="vertical-align: middle">{{ item.category | lowercase }}</td>
-            <td style="vertical-align: middle">{{ item.price | addTax:(taxRate || 0) | currency:"USD":"symbol":"2.2-2" }}</td>
+            <td style="vertical-align: middle">{{ item.price | discount | currency:"USD":"symbol":"0.2-2" }}</td>
+            <td style="vertical-align: middle" [pa-price]="item.price" #discount="discount">
+                {{ discount.discountAmount | currency:"USD":"symbol" }}
+            </td>
             <td class="text-center">
                 <button class="btn btn-danger btn-sm" (click)="deleteProduct(item.id)">
                     Delete
@@ -20,3 +24,6 @@
         </tr>
     </tbody>
 </table>
+
+<paDiscountEditor></paDiscountEditor>
+<paDiscountDisplay></paDiscountDisplay>

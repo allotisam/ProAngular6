@@ -1,5 +1,8 @@
+import { Injectable } from '@angular/core';
 import { Product } from './product.model';
+import { injectTemplateRef } from '@angular/core/src/render3';
 
+@Injectable()
 export class SimpleDataSource {
     private data: Product[];
 

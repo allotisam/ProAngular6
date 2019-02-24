@@ -10,9 +10,9 @@ import { ProductFormGroup } from './form.model';
     // styles: [ '/deep/ div { border: 2px black solid; font-style:italic }']
 })
 export class ProductComponent {
-    model: Model = new Model();
+    // model: Model = new Model();
 
-    constructor(ref: ApplicationRef) {
+    constructor(ref: ApplicationRef, private model: Model) {
         (<any>window).appRef = ref;
         (<any>window).model = this.model;
     }

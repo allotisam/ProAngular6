@@ -22,6 +22,8 @@ import { PaDiscountEditorComponent } from './discountEditor.component';
 import { DiscountService } from './discount.service';
 import { PaDiscountPipe } from './discount.pipe';
 import { PaDiscountAmountDirective } from './discountAmount.directive';
+import { SimpleDataSource } from './datasource.model';
+import { Model } from './repository.model';
 
 registerLocaleData(localeFr);
 import { from } from 'rxjs';
@@ -40,7 +42,8 @@ import { from } from 'rxjs';
     BrowserModule, FormsModule, ReactiveFormsModule
   ],
   providers: [
-    DiscountService
+    DiscountService,
+    SimpleDataSource, Model
     // { provide: LOCALE_ID, useValue: 'fr-FR' }
   ],
   bootstrap: [

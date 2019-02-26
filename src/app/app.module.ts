@@ -24,9 +24,11 @@ import { PaDiscountPipe } from './discount.pipe';
 import { PaDiscountAmountDirective } from './discountAmount.directive';
 import { SimpleDataSource } from './datasource.model';
 import { Model } from './repository.model';
+import { LogService, LOG_SERVICE, SpecialLogService, LogLevel, LOG_LEVEL } from './log.service';
 
-registerLocaleData(localeFr);
-import { from } from 'rxjs';
+// using Value Provider
+// const logger = new LogService();
+// logger.minimumLevel = LogLevel.DEBUG;
 
 @NgModule({
   declarations: [
@@ -43,8 +45,34 @@ import { from } from 'rxjs';
   ],
   providers: [
     DiscountService,
-    SimpleDataSource, Model
-    // { provide: LOCALE_ID, useValue: 'fr-FR' }
+    SimpleDataSource, Model,
+
+    { provide: LOG_LEVEL, useValue: LogLevel.DEBUG },
+    { provide: 'debugLevel', useExisting: LOG_LEVEL },
+    { provide: LogService,
+      deps: ['debugLevel'],
+      useFactory: (level) => {
+        const logger = new LogService();
+        logger.minimumLevel = level;
+        return logger;
+      }
+    }
+
+    // { provide: LOG_LEVEL, useValue: LogLevel.DEBUG },  // using Factory Provider
+    // {
+    //   provide: LogService,
+    //   deps: [LOG_LEVEL],
+    //   useFactory: () => {
+    //     const logger = new LogService();
+    //     logger.minimumLevel = LogLevel.DEBUG;
+    //     return logger;
+    //   }
+    // }
+
+    // { provide: LogService, useValue: logger }   // using value provider
+
+    // { provide: LOG_SERVICE, useClass: LogService, multi: true },   // using Class Provider
+    // { provide: LOG_SERVICE, useClass: SpecialLogService, multi: true }
   ],
   bootstrap: [
     ProductComponent

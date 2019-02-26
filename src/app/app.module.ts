@@ -25,10 +25,7 @@ import { PaDiscountAmountDirective } from './discountAmount.directive';
 import { SimpleDataSource } from './datasource.model';
 import { Model } from './repository.model';
 import { LogService, LOG_SERVICE, SpecialLogService, LogLevel, LOG_LEVEL } from './log.service';
-
-// using Value Provider
-// const logger = new LogService();
-// logger.minimumLevel = LogLevel.DEBUG;
+import { VALUE_SERVICE, PaDisplayValueDirective } from './valueDisplay.directive';
 
 @NgModule({
   declarations: [
@@ -38,41 +35,18 @@ import { LogService, LOG_SERVICE, SpecialLogService, LogLevel, LOG_LEVEL } from 
     ProductTableComponent, ProductFormComponent,
     PaToggleView,
     PaAddTaxPipe, PaCategoryFilterPipe,
-    PaDiscountDisplayComponent, PaDiscountEditorComponent, PaDiscountPipe, PaDiscountAmountDirective
+    PaDiscountDisplayComponent, PaDiscountEditorComponent, PaDiscountPipe, PaDiscountAmountDirective,
+    PaDisplayValueDirective
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule
   ],
   providers: [
     DiscountService,
-    SimpleDataSource, Model,
-
-    { provide: LOG_LEVEL, useValue: LogLevel.DEBUG },
-    { provide: 'debugLevel', useExisting: LOG_LEVEL },
-    { provide: LogService,
-      deps: ['debugLevel'],
-      useFactory: (level) => {
-        const logger = new LogService();
-        logger.minimumLevel = level;
-        return logger;
-      }
-    }
-
-    // { provide: LOG_LEVEL, useValue: LogLevel.DEBUG },  // using Factory Provider
-    // {
-    //   provide: LogService,
-    //   deps: [LOG_LEVEL],
-    //   useFactory: () => {
-    //     const logger = new LogService();
-    //     logger.minimumLevel = LogLevel.DEBUG;
-    //     return logger;
-    //   }
-    // }
-
-    // { provide: LogService, useValue: logger }   // using value provider
-
-    // { provide: LOG_SERVICE, useClass: LogService, multi: true },   // using Class Provider
-    // { provide: LOG_SERVICE, useClass: SpecialLogService, multi: true }
+    SimpleDataSource,
+    Model,
+    LogService,
+    { provide: VALUE_SERVICE, useValue: 'Apples' }
   ],
   bootstrap: [
     ProductComponent

@@ -49,7 +49,7 @@ import { VALUE_SERVICE, PaDisplayValueDirective } from './valueDisplay.directive
     { provide: VALUE_SERVICE, useValue: 'Apples' }
   ],
   bootstrap: [
-    ProductComponent
+    ProductFormComponent, ProductTableComponent
   ]
 })
 export class AppModule { }

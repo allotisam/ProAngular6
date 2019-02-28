@@ -1,8 +1,8 @@
 import { Component, Input, ViewChildren, QueryList } from '@angular/core';
-import { Model } from './repository.model';
-import { Product } from './product.model';
-import { PaCellColor } from './cellColor.directive';
-import { LogService } from './log.service';
+import { Model } from '../model/repository.model';
+import { Product } from '../model/product.model';
+import { PaCellColor } from '../common/cellColor.directive';
+import { LogService } from '../common/log.service';
 
 @Component({
     selector: 'paProductTable',

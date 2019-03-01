@@ -38,7 +38,7 @@ export class Model {
     }
 
     private generateId(): number {
-        let candidate = 100;
+        let candidate = 6;
         while (this.getProduct(candidate) != null) {
             candidate++;
         }

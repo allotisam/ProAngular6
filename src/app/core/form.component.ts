@@ -16,14 +16,10 @@ import { filter, map, distinctUntilChanged, skipWhile } from 'rxjs/operators';
 export class FormComponent {
     product = new Product();
     editing = false;
-    // lastId: number;
 
     constructor(private model: Model, @Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
 
         stateEvents
-        .pipe(skipWhile(state => state.mode === MODES.EDIT))
-        .pipe(distinctUntilChanged((firstState, secondState) =>
-            firstState.mode === secondState.mode && firstState.id === secondState.id))
         .subscribe(update => {
             this.product = new Product();
             if (update.id !== undefined) {
@@ -32,10 +28,6 @@ export class FormComponent {
             this.editing = update.mode === MODES.EDIT;
         });
     }
-
-    // get editing(): boolean {
-    //     return this.state.mode === MODES.EDIT;
-    // }
 
     submitForm(form: NgForm) {
         if (form.valid) {
@@ -48,14 +40,4 @@ export class FormComponent {
     resetForm() {
         this.product = new Product();
     }
-
-    // ngDoCheck() {
-    //     if (this.lastId !== this.state.id) {
-    //         this.product = new Product();
-    //         if (this.state.mode === MODES.EDIT) {
-    //             Object.assign(this.product, this.model.getProduct(this.state.id));
-    //         }
-    //         this.lastId = this.state.id;
-    //     }
-    // }
 }

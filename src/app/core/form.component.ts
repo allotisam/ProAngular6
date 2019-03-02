@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { Product } from '../model/product.model';
 import { Model } from '../model/repository.model';
 import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
-import { Observable } from 'rxjs';
-import { filter, map, distinctUntilChanged, skipWhile } from 'rxjs/operators';
 
 @Component({
     selector: 'paForm',
@@ -17,23 +18,18 @@ export class FormComponent {
     product = new Product();
     editing = false;
 
-    constructor(private model: Model, @Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
-
-        stateEvents
-        .subscribe(update => {
-            this.product = new Product();
-            if (update.id !== undefined) {
-                Object.assign(this.product, this.model.getProduct(update.id));
+    constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
+            this.editing = activeRoute.snapshot.params['mode'] === 'edit';
+            const id = activeRoute.snapshot.params['id'];
+            if (id != null || id !== undefined) {
+                Object.assign(this.product, this.model.getProduct(Number(id)) || new Product());
             }
-            this.editing = update.mode === MODES.EDIT;
-        });
-    }
+        }
 
     submitForm(form: NgForm) {
         if (form.valid) {
             this.model.saveProduct(this.product);
-            this.product = new Product();
-            form.reset();
+            this.router.navigateByUrl('/');
         }
     }
 

@@ -1,12 +1,13 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { MessageComponent } from './message.component';
 import { MessageService } from './message.service';
 import { MessageErrorHandler } from './errorHandler';
 
 @NgModule({
     imports: [
-        BrowserModule
+        BrowserModule, RouterModule
     ],
     declarations: [
         MessageComponent

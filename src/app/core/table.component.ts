@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Product } from '../model/product.model';
 import { Model } from '../model/repository.model';
 import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
-import { Observer, Observable } from 'rxjs';
+import { Observer } from 'rxjs';
 
 
 @Component({

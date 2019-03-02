@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessageComponent } from './message.component';
 import { MessageService } from './message.service';
+import { MessageErrorHandler } from './errorHandler';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { MessageService } from './message.service';
         MessageComponent
     ],
     providers: [
-        MessageService
+        MessageService,
+        { provide: ErrorHandler, useClass: MessageErrorHandler }
     ]
 })
 export class MessageModule { }

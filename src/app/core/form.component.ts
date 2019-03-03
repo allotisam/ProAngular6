@@ -19,12 +19,14 @@ export class FormComponent {
     editing = false;
 
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
-            this.editing = activeRoute.snapshot.params['mode'] === 'edit';
-            const id = activeRoute.snapshot.params['id'];
-            if (id != null || id !== undefined) {
+        activeRoute.params.subscribe(params => {
+            this.editing = params['mode'] === 'edit';
+            const id = params['id'];
+            if (id != null && id !== undefined) {
                 Object.assign(this.product, this.model.getProduct(Number(id)) || new Product());
             }
-        }
+        });
+    }
 
     submitForm(form: NgForm) {
         if (form.valid) {

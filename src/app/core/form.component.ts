@@ -16,6 +16,7 @@ import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
 })
 export class FormComponent {
     product = new Product();
+    originalProduct = new Product();
     editing = false;
 
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
@@ -24,6 +25,7 @@ export class FormComponent {
             const id = params['id'];
             if (id != null && id !== undefined) {
                 Object.assign(this.product, this.model.getProduct(Number(id)) || new Product());
+                Object.assign(this.originalProduct, this.product);
             }
         });
     }
@@ -31,11 +33,8 @@ export class FormComponent {
     submitForm(form: NgForm) {
         if (form.valid) {
             this.model.saveProduct(this.product);
+            this.originalProduct = this.product;
             this.router.navigateByUrl('/');
         }
-    }
-
-    resetForm() {
-        this.product = new Product();
     }
 }

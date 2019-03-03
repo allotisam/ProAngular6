@@ -16,6 +16,7 @@ import { Model } from '../model/repository.model';
 import { ProductCountComponent } from './productCount.component';
 import { CategoryCountComponent } from './categoryCount.component';
 import { NotFoundComponent } from './notFound.component';
+import { UnsavedGuard } from './unsaved.guard';
 
 @NgModule({
     imports: [
@@ -28,6 +29,8 @@ import { NotFoundComponent } from './notFound.component';
     exports: [
         ModelModule, TableComponent, FormComponent
     ],
-    providers: []
+    providers: [
+        UnsavedGuard
+    ]
 })
 export class CoreModule { }

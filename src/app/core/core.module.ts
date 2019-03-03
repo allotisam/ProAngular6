@@ -13,13 +13,17 @@ import { MessageModule } from '../messages/message.module';
 import { MessageService } from '../messages/message.service';
 import { Message } from '../messages/message.model';
 import { Model } from '../model/repository.model';
+import { ProductCountComponent } from './productCount.component';
+import { CategoryCountComponent } from './categoryCount.component';
+import { NotFoundComponent } from './notFound.component';
 
 @NgModule({
     imports: [
         BrowserModule, FormsModule, ModelModule, MessageModule, RouterModule
     ],
     declarations: [
-        TableComponent, FormComponent, StatePipe
+        TableComponent, FormComponent, StatePipe,
+        ProductCountComponent, CategoryCountComponent, NotFoundComponent
     ],
     exports: [
         ModelModule, TableComponent, FormComponent
@@ -27,4 +31,3 @@ import { Model } from '../model/repository.model';
     providers: []
 })
 export class CoreModule { }
-

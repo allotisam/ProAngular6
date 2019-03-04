@@ -9,7 +9,7 @@ import { ModelResolver } from './model.resolver';
         HttpClientModule, HttpClientJsonpModule
     ],
     providers: [
-        Model, RestDataSource, ModelResolver
+        Model, RestDataSource, ModelResolver,
         { provide: REST_URL, useValue: `http://${location.hostname}:3500/products` }
     ]
 })

@@ -9,6 +9,7 @@ import { MessageComponent } from './messages/message.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { TermsGuard } from './terms.guard';
+import { LoadGuard } from './load.guard';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { TermsGuard } from './terms.guard';
     AppComponent
   ],
   providers: [
-    TermsGuard
+    TermsGuard, LoadGuard
   ],
   bootstrap: [
     AppComponent

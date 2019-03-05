@@ -11,12 +11,15 @@ import { LoadGuard } from './load.guard';
 
 
 const routes: Routes = [
-    { path: 'form/:mode/:id', component: FormComponent, resolve: { model: ModelResolver }, canDeactivate: [UnsavedGuard] },
-    { path: 'form/:mode', component: FormComponent, resolve: { model: ModelResolver }, canActivate: [TermsGuard] },
-    { path: 'table', component: TableComponent },
-    { path: 'table/:category', component: TableComponent },
-    { path: '', redirectTo: 'table', pathMatch: 'full' },
-    { path: '**', component: NotFoundComponent }
+    {
+        path: 'ondemand',
+        loadChildren: './ondemand/ondemand.module#OndemandModule'
+    },
+    {
+        path: '',
+        redirectTo: '/ondemand',
+        pathMatch: 'full'
+    }
 ];
 
 export const routing = RouterModule.forRoot(routes);

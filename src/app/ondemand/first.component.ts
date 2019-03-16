@@ -1,7 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, Output, EventEmitter } from '@angular/core';
+import { Product } from '../model/product.model';
+import { Model } from '../model/repository.model';
 
 @Component({
     selector: 'first',
-    template: `<div class="bg-primary text-white p-2">First Component</div>`
+    templateUrl: 'first.component.html'
 })
-export class FirstComponent { }
+export class FirstComponent {
+
+    category = 'Soccer';
+    highlighted = false;
+
+    @Output('pa-highlight')
+    change = new EventEmitter<boolean>();
+
+    constructor(private repository: Model) {}
+
+    getProducts(): Product[] {
+        return this.repository.getProducts().filter(p => p.category === this.category);
+    }
+
+    @HostListener('mouseenter', ['$event.type'])
+    @HostListener('mouseleave', ['$event.type'])
+    setHighlight(type: string) {
+        this.highlighted = type === 'mouseenter';
+        this.change.emit(this.highlighted);
+    }
+}

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { Model } from './repository.model';
 import { Product } from './product.model';
+import { ProductFormGroup } from './form.model';
 import { debug } from 'util';
 
 @Component({
@@ -15,6 +16,7 @@ export class ProductComponent {
     newProduct = new Product();
 
     formSubmitted = false;
+    form = new ProductFormGroup();
 
     getProduct(key: number): Product {
         return this.model.getProduct(key);
@@ -38,37 +40,6 @@ export class ProductComponent {
 
     addProduct(p: Product) {
         console.log('New Product: ' + this.jsonProduct);
-    }
-
-    getValidationMessages(state: any, thingName?: string) {
-        debugger;
-        const thing = state.path || thingName;
-        const messages: string[] = [];
-
-        if (state.errors) {
-            for (var error in state.errors) {
-                switch (error) {
-                    case 'required':
-                        messages.push(`You must enter a ${thing}`);
-                        break;
-                    case 'minlength':
-                        messages.push(`A ${thing} must be at least ${state.errors['minlength'].requiredLength} characters`);
-                        break;
-                    case 'pattern':
-                        messages.push(`The ${thing} contains illegal characters`);
-                        break;
-                }
-            }
-        }
-        return messages;
-    }
-
-    getFormValidationMessages(form: NgForm): string[] {
-        const messages: string[] = [];
-        Object.keys(form.controls).forEach(k => {
-            this.getValidationMessages(form.controls[k], k).forEach(m => messages.push(m));
-        });
-        return messages;
     }
 
     submitForm(form: NgForm) {

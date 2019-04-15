@@ -8,6 +8,7 @@ import { Product } from './product.model';
 })
 export class ProductComponent {
     model: Model = new Model();
+    selectedProduct: string;
 
     getProduct(key: number): Product {
         return this.model.getProduct(key);
@@ -17,4 +18,11 @@ export class ProductComponent {
         return this.model.getProducts();
     }
 
+    getSelected(product: Product): boolean {
+        if (product.name && this.selectedProduct) {
+            return product.name.toLowerCase() === this.selectedProduct.toLowerCase();
+        }
+
+        return false;
+    }
 }
